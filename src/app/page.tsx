@@ -59,6 +59,9 @@ const ResponseCard = (p: ResponseCardProps) => {
           Total Tokens Used: {p.res.totalTokens}
         </p>
       )}
+      <p className="text-sm text-gray-500">
+        Time Taken: {p.res.timeTakenMs} ms
+      </p>
     </div>
   );
 };

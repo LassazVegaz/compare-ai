@@ -19,13 +19,17 @@ export class ComparisonService {
     model: LanguageModel,
     prompt: string,
   ): Promise<CallModelResponse> {
+    const startTime = Date.now();
     const res = streamText({ model, prompt });
     const usage = await res.totalUsage;
+    const text = await res.text;
+    const endTime = Date.now();
 
     return {
-      text: await res.text,
+      text,
+      model,
       totalTokens: usage.totalTokens,
-      model: model,
+      timeTakenMs: endTime - startTime,
     };
   }
 }
