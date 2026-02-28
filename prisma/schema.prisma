@@ -14,13 +14,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Message {
-  id               String @id @default(auto()) @map("_id") @db.ObjectId
-  prompt           String
-  response         String
+model CompareGroup {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  prompt    String
+  responses Message[]
+}
+
+type Message {
+  text             String
   model            String
   inputTokens      Int?
   outputTokens     Int?
   inputTokenPrice  Float?
   outputTokenPrice Float?
+  time             Int
 }
