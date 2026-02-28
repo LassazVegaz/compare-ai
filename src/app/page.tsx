@@ -62,6 +62,9 @@ const ResponseCard = (p: ResponseCardProps) => {
       <p className="text-sm text-gray-500">
         Time Taken: {p.res.timeTakenMs} ms
       </p>
+      {p.res.price !== undefined && (
+        <p className="text-sm text-gray-500">Estimated Cost: ${p.res.price}</p>
+      )}
     </div>
   );
 };

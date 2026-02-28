@@ -1,5 +1,6 @@
 import CallModelResponse from "@/types/model-response.type";
 import { LanguageModel, streamText } from "ai";
+import pricingService from "./pricing.service";
 
 type CompareParams = {
   prompt: string;
@@ -25,9 +26,12 @@ export class ComparisonService {
     const text = await res.text;
     const endTime = Date.now();
 
+    const price = await pricingService.calculateCost(model, usage);
+
     return {
       text,
       model,
+      price,
       totalTokens: usage.totalTokens,
       timeTakenMs: endTime - startTime,
     };

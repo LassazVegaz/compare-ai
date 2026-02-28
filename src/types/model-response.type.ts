@@ -5,6 +5,7 @@ type CallModelResponse = {
   totalTokens?: number;
   model: LanguageModel;
   timeTakenMs: number;
+  price?: number;
 };
 
 export default CallModelResponse;
