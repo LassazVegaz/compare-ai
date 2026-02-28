@@ -1,5 +1,5 @@
+import SupportedModel from "@/types/supported-model.type";
 import { gateway, GatewayLanguageModelEntry } from "@ai-sdk/gateway";
-import { LanguageModel } from "ai";
 import NodeCache from "node-cache";
 
 /**
@@ -14,7 +14,7 @@ const allModelsCache = new NodeCache({ stdTTL: 60 * 1 });
 const CACHE_KEY_ALL_MODELS = "all_models";
 
 export class PricingService {
-  async getModelPrice(model: LanguageModel) {
+  async getModelPrice(model: SupportedModel) {
     const modelInfo = await this.getModelInfo(model);
 
     const input = modelInfo?.pricing?.input
@@ -27,8 +27,8 @@ export class PricingService {
     return { input, output };
   }
 
-  private async getModelInfo(model: LanguageModel) {
-    const modelCacheKey = model.toString();
+  private async getModelInfo(model: SupportedModel) {
+    const modelCacheKey = model;
     let modelInfo = singleModelCache.get<GatewayLanguageModelEntry | undefined>(
       modelCacheKey,
     );

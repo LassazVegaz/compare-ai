@@ -1,11 +1,12 @@
-import { LanguageModel, streamText } from "ai";
+import { streamText } from "ai";
 import pricingService from "./pricing.service";
 import prisma from "./prisma.service";
 import { Message } from "@/generated/prisma/client";
+import SupportedModel from "@/types/supported-model.type";
 
 type CompareParams = {
   prompt: string;
-  models: LanguageModel[];
+  models: SupportedModel[];
 };
 
 export class ComparisonService {
@@ -25,7 +26,7 @@ export class ComparisonService {
   }
 
   private async callModel(
-    model: LanguageModel,
+    model: SupportedModel,
     prompt: string,
   ): Promise<Message> {
     const startTime = Date.now();
@@ -38,7 +39,7 @@ export class ComparisonService {
 
     return {
       text,
-      model: model.toString(),
+      model,
       inputTokens: usage.inputTokens ?? null,
       outputTokens: usage.outputTokens ?? null,
       inputTokenPrice: price.input ?? null,
