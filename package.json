@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@ai-sdk/gateway": "^3.0.59",
+    "@prisma/client": "~6.19.2",
     "ai": "^6.0.105",
+    "dotenv": "^17.3.1",
     "next": "16.1.6",
     "node-cache": "^5.1.2",
     "react": "19.2.3",
@@ -24,6 +26,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
+    "prisma": "~6.19.2",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
