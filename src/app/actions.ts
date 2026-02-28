@@ -1,14 +1,24 @@
 "use server";
-import { ComparisonService } from "@/services/compare.service";
+import * as z from "zod";
+import comparisonService from "@/services/compare.service";
+import SupportedModel from "@/types/supported-model.type";
 
-export async function compareModels(prompt: string) {
-  const comparisonService = new ComparisonService();
-  return comparisonService.compare({
-    prompt,
-    models: [
-      "openai/gpt-5.2-pro",
-      "anthropic/claude-sonnet-4.6",
-      "google/gemini-3.1-pro-preview",
-    ],
-  });
-}
+const supportedModels: SupportedModel[] = [
+  "anthropic/claude-3-opus",
+  "anthropic/claude-sonnet-4.6",
+  "openai/gpt-4o",
+  "xai/grok-4",
+];
+
+const schema = z.object({
+  prompt: z.string(),
+  models: z.array(z.enum(supportedModels)),
+});
+
+export const compareModels = async (
+  prompt: string,
+  models: SupportedModel[],
+) => {
+  const parsed = schema.parse({ prompt, models });
+  return await comparisonService.compare(parsed);
+};
