@@ -1,3 +1,4 @@
+import CallModelResponse from "@/types/model-response.type";
 import { LanguageModel, streamText } from "ai";
 
 type CompareParams = {
@@ -14,8 +15,16 @@ export class ComparisonService {
     return res;
   }
 
-  private async callModel(model: LanguageModel, prompt: string) {
+  private async callModel(
+    model: LanguageModel,
+    prompt: string,
+  ): Promise<CallModelResponse> {
     const res = streamText({ model, prompt });
-    return await res.text;
+    const usage = await res.totalUsage;
+
+    return {
+      text: await res.text,
+      totalTokens: usage.totalTokens,
+    };
   }
 }

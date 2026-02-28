@@ -1,9 +1,10 @@
 "use client";
 import { useState } from "react";
 import { compareModels } from "./actions";
+import CallModelResponse from "@/types/model-response.type";
 
 export default function Home() {
-  const [responses, setResponses] = useState<string[]>([]);
+  const [responses, setResponses] = useState<CallModelResponse[]>([]);
   const [loading, setLoading] = useState(false);
 
   return (
@@ -37,7 +38,12 @@ export default function Home() {
         {responses.map((res, idx) => (
           <div key={idx} className="border p-2 mb-2">
             <h3 className="font-bold">Model {idx + 1} Response:</h3>
-            <p>{res}</p>
+            <p>{res.text}</p>
+            {res.totalTokens !== undefined && (
+              <p className="text-sm text-gray-500">
+                Total Tokens Used: {res.totalTokens}
+              </p>
+            )}
           </div>
         ))}
       </div>
