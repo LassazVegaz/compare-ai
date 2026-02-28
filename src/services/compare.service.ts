@@ -48,3 +48,6 @@ export class ComparisonService {
     };
   }
 }
+
+const comparisonService = new ComparisonService();
+export default comparisonService;
