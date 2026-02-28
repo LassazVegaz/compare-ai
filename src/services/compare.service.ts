@@ -25,6 +25,7 @@ export class ComparisonService {
     return {
       text: await res.text,
       totalTokens: usage.totalTokens,
+      model: model,
     };
   }
 }

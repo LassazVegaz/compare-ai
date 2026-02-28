@@ -35,16 +35,8 @@ export default function Home() {
       </button>
 
       <div className="mt-4">
-        {responses.map((res, idx) => (
-          <div key={idx} className="border p-2 mb-2">
-            <h3 className="font-bold">Model {idx + 1} Response:</h3>
-            <p>{res.text}</p>
-            {res.totalTokens !== undefined && (
-              <p className="text-sm text-gray-500">
-                Total Tokens Used: {res.totalTokens}
-              </p>
-            )}
-          </div>
+        {responses.map((res) => (
+          <ResponseCard key={res.model.toString()} res={res} />
         ))}
       </div>
 
@@ -52,3 +44,21 @@ export default function Home() {
     </div>
   );
 }
+
+type ResponseCardProps = {
+  res: CallModelResponse;
+};
+
+const ResponseCard = (p: ResponseCardProps) => {
+  return (
+    <div className="border p-2 mb-2">
+      <h3 className="font-bold">{p.res.model.toString()} Response</h3>
+      <p>{p.res.text}</p>
+      {p.res.totalTokens !== undefined && (
+        <p className="text-sm text-gray-500">
+          Total Tokens Used: {p.res.totalTokens}
+        </p>
+      )}
+    </div>
+  );
+};
