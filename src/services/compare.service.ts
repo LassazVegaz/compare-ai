@@ -31,7 +31,7 @@ export class ComparisonService {
     return {
       text,
       model,
-      price,
+      price: price?.totalCost,
       totalTokens: usage.totalTokens,
       timeTakenMs: endTime - startTime,
     };
