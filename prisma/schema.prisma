@@ -18,6 +18,7 @@ model CompareGroup {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   prompt    String
   responses Message[]
+  createdAt DateTime  @default(now())
 }
 
 type Message {
