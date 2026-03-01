@@ -41,6 +41,48 @@ body {
   background: #313131;
 }
 
+/* Tooltip container */
+.tooltip {
+  position: relative; /* Required to position the tooltip text (position: absolute) */
+  display: inline-block; /* Allows the container to wrap its content and receive hover events */
+  border-bottom: 1px dotted black; /* Optional: adds a dotted line under the text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden; /* Hide the tooltip by default */
+  background-color: #555; /* Dark background */
+  color: #fff; /* White text */
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute; /* Position the tooltip text */
+  z-index: 1; /* Place the tooltip above other elements */
+  bottom: 125%; /* Position above the hovered text */
+  left: 50%;
+  margin-left: -60px; /* Center the tooltip (half of the width) */
+  opacity: 0; /* Use opacity for fade effect */
+  transition: opacity 0.3s; /* Add a transition effect */
+}
+
+/* Show the tooltip text when you hover over the container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Optional: Add an arrow to the tooltip content */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
 @keyframes spiner {
   0% {
     rotate: 0deg;
