@@ -1,6 +1,9 @@
+import "./globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import homeIcon from "@/../public/home-icon.png";
+import historyIcon from "@/../public/history-icon.png";
+import NavigationLink from "./components/NavigationLink";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +28,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased relative`}
       >
+        <div className="absolute flex gap-4 left-4 top-4">
+          <NavigationLink href="/" src={homeIcon} alt="Home" />
+          <NavigationLink href="/comparisons" src={historyIcon} alt="History" />
+        </div>
+
         {children}
       </body>
     </html>
