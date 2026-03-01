@@ -40,7 +40,7 @@ export default async function ComparisonResultsPage(
     <div className="h-lvh w-lvw py-4 px-8 grid gird grid-rows-[auto_1fr] gap-8">
       <h1 className="text-center text-4xl">Comparison Results</h1>
 
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 overflow-auto scrollbar-custom">
         {responses.map((r) => (
           <div
             key={r.model}
@@ -50,7 +50,7 @@ export default async function ComparisonResultsPage(
               {r.humaizedModelName}
             </h1>
 
-            <p>{r.text}</p>
+            <p className="text-sm whitespace-pre-wrap">{r.text}</p>
 
             <div className="text-sm text-gray-500">
               <div className="tooltip">
