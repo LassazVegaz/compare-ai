@@ -9,6 +9,13 @@ type CompareParams = {
   models: SupportedModel[];
 };
 
+export const supportedModels: SupportedModel[] = [
+  "anthropic/claude-3-opus",
+  "anthropic/claude-sonnet-4.6",
+  "openai/gpt-4o",
+  "xai/grok-4",
+];
+
 export class ComparisonService {
   async compare(params: CompareParams) {
     const res = await Promise.all(

@@ -1,70 +1,54 @@
-"use client";
-import { useState } from "react";
-import { compareModels } from "./actions";
-import CallModelResponse from "@/types/model-response.type";
+import sendIcon from "@/../public/send-icon.png";
+import { supportedModels } from "@/services/compare.service";
+import Image from "next/image";
+
+const specialKeywords: Record<string, string> = {
+  openai: "OpenAI",
+  xai: "xAI",
+};
+
+const checkboxes = supportedModels.map((m) => {
+  const parts = m
+    .replaceAll("/", "-")
+    .split("-")
+    .map((p) => {
+      if (p in specialKeywords) p = specialKeywords[p];
+      else p = p[0].toUpperCase() + p.substring(1);
+      return p;
+    });
+
+  return {
+    value: m,
+    label: parts.join(" "),
+  };
+});
 
 export default function Home() {
-  const [responses, setResponses] = useState<CallModelResponse[]>([]);
-  const [loading, setLoading] = useState(false);
-
   return (
-    <div>
-      <input
-        type="text"
-        className="border p-2 w-full"
-        placeholder="Enter your prompt here..."
-      />
-      <button
-        className="bg-blue-500 text-white p-2 mt-2"
-        onClick={async () => {
-          try {
-            setLoading(true);
-            const res = await compareModels("What is the capital of France?");
-            setResponses(res);
-          } catch (e) {
-            console.error("Error comparing models:", e);
-            alert(
-              "An error occurred while comparing models. Please try again.",
-            );
-          } finally {
-            setLoading(false);
-          }
-        }}
-      >
-        Compare Models
-      </button>
+    <div className="h-lvh py-4 px-8 grid grid-rows-[5fr_auto_2fr]">
+      <div className="flex gap-6 flex-col justify-center items-center">
+        <h1 className="text-3xl">Compare Models</h1>
+        <p>Select three models and compare with one input</p>
+      </div>
 
-      <div className="mt-4">
-        {responses.map((res) => (
-          <ResponseCard key={res.model.toString()} res={res} />
+      <div className="flex justify-between mb-6">
+        {checkboxes.map((c) => (
+          <div
+            key={c.value}
+            className="flex gap-x-2 py-2 px-4 rounded-xl border border-blue-400"
+          >
+            <label htmlFor={c.value}>{c.label}</label>
+            <input type="checkbox" name={c.value} />
+          </div>
         ))}
       </div>
 
-      {loading && <p>Loading responses...</p>}
+      <div className="grid grid-cols-[1fr_auto] gap-x-4">
+        <textarea className="border outline-none rounded-xl p-4 scrollbar-custom" />
+        <button className="self-center rounded-full cursor-pointer">
+          <Image src={sendIcon} alt="send button" className="w-12" />
+        </button>
+      </div>
     </div>
   );
 }
-
-type ResponseCardProps = {
-  res: CallModelResponse;
-};
-
-const ResponseCard = (p: ResponseCardProps) => {
-  return (
-    <div className="border p-2 mb-2">
-      <h3 className="font-bold">{p.res.model.toString()} Response</h3>
-      <p>{p.res.text}</p>
-      {p.res.totalTokens !== undefined && (
-        <p className="text-sm text-gray-500">
-          Total Tokens Used: {p.res.totalTokens}
-        </p>
-      )}
-      <p className="text-sm text-gray-500">
-        Time Taken: {p.res.timeTakenMs} ms
-      </p>
-      {p.res.price !== undefined && (
-        <p className="text-sm text-gray-500">Estimated Cost: ${p.res.price}</p>
-      )}
-    </div>
-  );
-};
