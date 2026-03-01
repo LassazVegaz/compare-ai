@@ -53,7 +53,19 @@ export default async function ComparisonResultsPage(
             <p>{r.text}</p>
 
             <div className="text-sm text-gray-500">
-              <p>Total Price: ${r.totalPrice?.toFixed(10) ?? "N/A"}</p>
+              <div className="tooltip">
+                Total Price: ${r.totalPrice?.toFixed(8) ?? "N/A"}
+                <div className="tooltiptext">
+                  <div>
+                    Input Tokens: {r.inputTokens ?? "N/A"} @ $
+                    {r.inputTokenPrice?.toFixed(8) ?? "N/A"} / token
+                  </div>
+                  <div>
+                    Output Tokens: {r.outputTokens ?? "N/A"} @ $
+                    {r.outputTokenPrice?.toFixed(8) ?? "N/A"} / token
+                  </div>
+                </div>
+              </div>
               <p>Total Tokens: {r.totalTokens ?? "N/A"}</p>
               <p>Time: {r.time} ms</p>
             </div>
