@@ -40,3 +40,21 @@ body {
 .scrollbar-custom::-webkit-scrollbar-thumb:hover {
   background: #313131;
 }
+
+@keyframes spiner {
+  0% {
+    rotate: 0deg;
+    border-color: blue;
+    border-radius: 0%;
+  }
+  50% {
+    rotate: 180deg;
+    border-color: rgb(17, 123, 176);
+    border-radius: 50%;
+  }
+  100% {
+    rotate: 360deg;
+    border-color: blue;
+    border-radius: 0%;
+  }
+}
