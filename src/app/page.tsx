@@ -1,4 +1,4 @@
-import { supportedModels } from "@/services/compare.service";
+import { supportedModels } from "@/services/comparison.service";
 import ClientSide from "./components/ClientSide";
 import KeyValuePair from "@/types/key-value-pair.type";
 

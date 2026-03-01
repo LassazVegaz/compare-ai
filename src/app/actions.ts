@@ -1,6 +1,8 @@
 "use server";
 import * as z from "zod";
-import comparisonService, { supportedModels } from "@/services/compare.service";
+import comparisonService, {
+  supportedModels,
+} from "@/services/comparison.service";
 
 const schema = z.object({
   prompt: z.string(),
