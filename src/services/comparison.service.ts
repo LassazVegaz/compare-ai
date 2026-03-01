@@ -10,9 +10,9 @@ type CompareParams = {
 };
 
 export const supportedModels: SupportedModel[] = [
-  "anthropic/claude-3-opus",
+  "anthropic/claude-opus-4",
   "anthropic/claude-sonnet-4.6",
-  "openai/gpt-4o",
+  "openai/gpt-5.2",
   "xai/grok-4",
 ];
 

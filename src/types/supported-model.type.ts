@@ -1,6 +1,6 @@
 type SupportedModel =
-  | "openai/gpt-4o"
-  | "anthropic/claude-3-opus"
+  | "openai/gpt-5.2"
+  | "anthropic/claude-opus-4"
   | "anthropic/claude-sonnet-4.6"
   | "xai/grok-4";
 
