@@ -81,11 +81,12 @@ export default function ClientSide(props: Readonly<ClientSideProps>) {
 
     setIsLoading(true);
     try {
-      const newId = await compareModels(
-        promptRef.current!.value,
-        selectedModels,
-      );
-      router.push(`/comparisons/${newId}`);
+      const res = await compareModels(promptRef.current!.value, selectedModels);
+      if (typeof res === "string") {
+        router.push(`/comparisons/${res}`);
+      } else {
+        alert(res.message);
+      }
     } catch (e) {
       console.error(e);
       alert("Something went wrong. Please try again");
