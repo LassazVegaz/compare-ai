@@ -17,6 +17,12 @@ export const supportedModels: SupportedModel[] = [
 ];
 
 export class ComparisonService {
+  async getSavedResults(id: string) {
+    return await prisma.compareGroup.findUnique({
+      where: { id },
+    });
+  }
+
   async compare(params: CompareParams) {
     const res = await Promise.all(
       params.models.map((m) => this.callModel(m, params.prompt)),

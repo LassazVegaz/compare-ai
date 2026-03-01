@@ -1,27 +1,12 @@
 import { supportedModels } from "@/services/comparison.service";
 import ClientSide from "./components/ClientSide";
 import KeyValuePair from "@/types/key-value-pair.type";
+import humanizerService from "@/services/humanizer.service";
 
-const specialKeywords: Record<string, string> = {
-  openai: "OpenAI",
-  xai: "xAI",
-};
-
-const checkboxes = supportedModels.map<KeyValuePair>((m) => {
-  const parts = m
-    .replaceAll("/", "-")
-    .split("-")
-    .map((p) => {
-      if (p in specialKeywords) p = specialKeywords[p];
-      else p = p[0].toUpperCase() + p.substring(1);
-      return p;
-    });
-
-  return {
-    key: m,
-    value: parts.join(" "),
-  };
-});
+const checkboxes = supportedModels.map<KeyValuePair>((m) => ({
+  key: m,
+  value: humanizerService.humanizeModelId(m),
+}));
 
 export default function Home() {
   return (
