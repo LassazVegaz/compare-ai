@@ -17,6 +17,12 @@ export const supportedModels: SupportedModel[] = [
 ];
 
 export class ComparisonService {
+  async getAllComparisons() {
+    return await prisma.compareGroup.findMany({
+      orderBy: { createdAt: "desc" },
+    });
+  }
+
   async getSavedResults(id: string) {
     return await prisma.compareGroup.findUnique({
       where: { id },
