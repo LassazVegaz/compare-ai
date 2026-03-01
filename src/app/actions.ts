@@ -5,7 +5,7 @@ import SupportedModel from "@/types/supported-model.type";
 
 const schema = z.object({
   prompt: z.string(),
-  models: z.array(z.enum(supportedModels)),
+  models: z.array(z.enum(supportedModels)).length(3),
 });
 
 export const compareModels = async (

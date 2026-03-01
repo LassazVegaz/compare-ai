@@ -18,6 +18,7 @@ type ModelCheckboxProps = {
 };
 
 const MAX_CHECK_COUNT = 3;
+const VALID_CHECK_COUNT = MAX_CHECK_COUNT;
 
 const buildCheckboxesStates = (checkboxes: ClientSideProps["checkboxes"]) => {
   const state: Record<string, boolean> = {};
@@ -77,10 +78,14 @@ export default function ClientSide(props: Readonly<ClientSideProps>) {
       </div>
 
       <div className="grid grid-cols-[1fr_auto] gap-x-4">
-        <textarea className="border outline-none rounded-xl p-4 scrollbar-custom" />
+        <textarea
+          className="border outline-none rounded-xl p-4 scrollbar-custom"
+          required
+        />
         <button
           type="submit"
-          className="self-center rounded-full cursor-pointer disabled:opacity-[0.4]"
+          disabled={checkedCount !== VALID_CHECK_COUNT}
+          className="self-center rounded-full cursor-pointer disabled:opacity-[0.4] disabled:cursor-default"
         >
           <Image src={sendIcon} alt="send button" className="w-12" />
         </button>
